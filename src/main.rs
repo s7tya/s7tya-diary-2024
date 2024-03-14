@@ -24,7 +24,13 @@ fn main() -> anyhow::Result<()> {
             date_caps.get(2).unwrap().as_str(),
             date_caps.get(3).unwrap().as_str(),
         ))?;
-        file.write_all(format!("\n{}\n", post.trim()).as_bytes())?;
+        file.write_all(
+            format!(
+                "---\nlayout: layout.tsx\n---\n\n{}\n",
+                post.trim().replace("##", "#")
+            )
+            .as_bytes(),
+        )?;
     }
 
     Ok(())
