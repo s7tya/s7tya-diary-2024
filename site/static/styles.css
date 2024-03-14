@@ -1,0 +1,50 @@
+html,
+body {
+  font-family: sans-serif;
+}
+
+body {
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 40px 20px;
+}
+
+.header {
+  h1 > a {
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+.post-list {
+  display: grid;
+  gap: 16px;
+
+  .post-card {
+    & > a {
+      text-decoration: none;
+      color: black;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+p {
+  line-height: 1.5;
+}

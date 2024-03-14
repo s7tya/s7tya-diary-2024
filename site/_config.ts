@@ -4,6 +4,8 @@ import mdx from "lume/plugins/mdx.ts";
 
 const site = lume();
 
+site.copy("static", "/")
+
 site.use(jsx());
 site.use(mdx());
 
