@@ -1,2 +1,2 @@
-_site
-posts/
+_site/
+posts/*.mdx
