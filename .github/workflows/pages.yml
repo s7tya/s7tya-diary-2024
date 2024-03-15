@@ -31,7 +31,7 @@ jobs:
       - name: Build app
         run: cargo build --release
       - name: Run binary
-        run: ./target/release/blog-playground
+        run: ./target/release/s7tya-diary-2024
 
       - uses: denoland/setup-deno@v1
       - name: Build site
