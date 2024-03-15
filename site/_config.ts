@@ -9,7 +9,7 @@ import feed from "lume/plugins/feed.ts";
 
 await load({ envPath: "../.env", export: true })
 
-const site = lume();
+const site = lume({ location: "https://diary.s7tya.com" });
 
 site.copy("static", "/")
 
