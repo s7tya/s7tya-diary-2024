@@ -32,7 +32,7 @@ fn main() -> anyhow::Result<()> {
         let mut file = fs::File::create(format!("{dir}{date_str}.mdx",))?;
         file.write_all(
             format!(
-                "---\ntitle: {date_str}{title}\n---\n\n{}\n",
+                r#"---\ntitle: "{date_str}{title}"\n---\n\n{}\n"#,
                 post.trim().replace("##", "#")
             )
             .as_bytes(),

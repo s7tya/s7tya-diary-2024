@@ -15,6 +15,7 @@ export default ({ title, children }: Lume.Data, helpers: Lume.Helpers) => {
                         <h1><a href="/">/s7tya-diary-2024</a></h1>
                         <nav>
                             <a href="/rss.xml">📡</a>
+                            <a href="https://gist.github.com/s7tya/efff8d8635292b8a3305c850e5be2330">Raw (Gist)</a>
                         </nav>
                     </header>
                     <main>
