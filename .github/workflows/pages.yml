@@ -22,6 +22,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GIST_ID: ${{ variables.GIST_ID }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
