@@ -11,22 +11,28 @@ fn main() -> anyhow::Result<()> {
     let dir = "site/posts/";
     fs::create_dir_all(dir)?;
 
-    let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})").unwrap();
+    let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})(?: (.*))?").unwrap();
     for post in posts {
         if !diary_re.is_match(post) {
             continue;
         }
 
-        let date_caps = diary_re.captures(post).unwrap();
-        let mut file = fs::File::create(format!(
-            "{dir}{}-{}-{}.mdx",
-            date_caps.get(1).unwrap().as_str(),
-            date_caps.get(2).unwrap().as_str(),
-            date_caps.get(3).unwrap().as_str(),
-        ))?;
+        let caps = diary_re.captures(post).unwrap();
+        let date_str = format!(
+            "{}-{}-{}",
+            caps.get(1).unwrap().as_str(),
+            caps.get(2).unwrap().as_str(),
+            caps.get(3).unwrap().as_str()
+        );
+        let title = match caps.get(4) {
+            Some(title) => format!(" {}", title.as_str()),
+            None => "".to_string(),
+        };
+
+        let mut file = fs::File::create(format!("{dir}{date_str}.mdx",))?;
         file.write_all(
             format!(
-                "---\nlayout: layout.tsx\n---\n\n{}\n",
+                "---\ntitle: {date_str}{title}\n---\n\n{}\n",
                 post.trim().replace("##", "#")
             )
             .as_bytes(),
