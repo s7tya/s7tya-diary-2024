@@ -1,9 +1,12 @@
-use std::{fs, io::Write};
+use std::{env, fs, io::Write};
 
 fn main() -> anyhow::Result<()> {
-    let raw_markdown = reqwest::blocking::get(
-        "https://gist.github.com/s7tya/efff8d8635292b8a3305c850e5be2330/raw",
-    )?
+    dotenvy::dotenv().ok();
+
+    let raw_markdown = reqwest::blocking::get(format!(
+        "https://gist.github.com/{}/raw",
+        env::var("GIST_ID").unwrap()
+    ))?
     .text()?;
     // let raw_markdown = fs::read_to_string("s7tya-diary-2024.md")?;
     let posts = raw_markdown.split("---").collect::<Vec<_>>();

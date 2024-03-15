@@ -1,4 +1,4 @@
-export default ({ title, children }: Lume.Data, helpers: Lume.Helpers) => {
+export default ({ title, GIST_ID, children }: Lume.Data, helpers: Lume.Helpers) => {
     return (
         <html>
             <head>
@@ -16,7 +16,7 @@ export default ({ title, children }: Lume.Data, helpers: Lume.Helpers) => {
                         <nav>
                             <a href="/rss.xml">📡 Feed</a>
                             <span>|</span>
-                            <a href="https://gist.github.com/s7tya/efff8d8635292b8a3305c850e5be2330">Raw (Gist)</a>
+                            <a href={`https://gist.github.com/${Deno.env.get("GIST_ID")}`}>Raw (Gist)</a>
                         </nav>
                     </header>
                     <main>
