@@ -27,22 +27,16 @@ fn main() -> anyhow::Result<()> {
             caps.get(2).unwrap().as_str(),
             caps.get(3).unwrap().as_str()
         );
-        let date_str_dot = format!(
-            "{}.{}.{}",
-            caps.get(1).unwrap().as_str(),
-            caps.get(2).unwrap().as_str(),
-            caps.get(3).unwrap().as_str()
-        );
 
         let title = match caps.get(4) {
-            Some(title) => format!(" {}", title.as_str()),
+            Some(title) => format!("{}", title.as_str()),
             None => "".to_string(),
         };
 
         let mut file = fs::File::create(format!("{dir}{date_str}.mdx",))?;
         file.write_all(
             format!(
-                "---\ntitle: \"{date_str_dot}{title}\"\n---\n\n{}\n",
+                "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n---\n\n{}\n",
                 post.trim().replace("##", "#")
             )
             .as_bytes(),
