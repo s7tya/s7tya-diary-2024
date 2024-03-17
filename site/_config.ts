@@ -28,7 +28,9 @@ site.use(feed({
     lang: "=site.lang",
   },
   items: {
-    title: "=title",
+    title: (data) => {
+      return `${data.basename.replaceAll("-", ".")}${data.title ? ` ${data.title}` : ""}`
+    },
   },
 }));
 
