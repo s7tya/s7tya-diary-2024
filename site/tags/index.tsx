@@ -1,15 +1,18 @@
-export const layout = "base.tsx"; // 全ページ共通のフロントマター
+import { Activity } from "../_components/Activity.tsx";
 
+export const layout = "base.tsx";
 
 export default function* ({ search }: Lume.Data) {
-    const tags = search.values("tags"); // 全タグを収集
+    const tags: string[] = search.values("tags");
 
     for (const tag of tags) {
-        const links = search.pages(tag as string, "date=desc").map((page) => {
+        const pages = search.pages(tag as string, "date=desc");
+        const dates = pages.map((page) => page.date.toISOString().slice(0, 10));
 
+        const Links = pages.map((page) => {
             return (
                 <div key={page.url} className="post-card" id={`post-${page.basename}`}>
-                    <a href={`./posts/${page.basename}`}>
+                    <a href={`/posts/${page.basename}`}>
                         <h2 className="post-title">
                             {page.basename.replaceAll("-", ".")}
                             {page.title ? ` ${page.title}` : ""}
@@ -24,14 +27,16 @@ export default function* ({ search }: Lume.Data) {
                 </div>)
         });
 
-        console.log(links)
-
         yield {
             title: `${tag}のページ一覧`,
             url: `/tags/${tag}/`,
-            content: (<div>
-                {links}
-            </div>)
+            content: (
+                <div>
+                    <h1>/tags/{tag}</h1>
+                    <Activity dates={dates} />
+                    {Links}
+                </div>
+            )
         };
     }
 }
