@@ -1,4 +1,5 @@
 import { Head } from "../_components/Head.tsx";
+import { Header } from "../_components/Header.tsx";
 
 export default ({ title, children, search }: Lume.Data, helpers: Lume.Helpers) => {
 
@@ -9,23 +10,12 @@ export default ({ title, children, search }: Lume.Data, helpers: Lume.Helpers) =
       <Head title={title!} />
       <body>
         <div className="root">
-          <header className="header">
-            <h1>
-              <a href="/">/s7tya-diary-2024</a>
-            </h1>
-            <nav>
-              <a href="/rss.xml">📡 Feed</a>
-              <span>|</span>
-              <a href={`https://gist.github.com/${Deno.env.get("GIST_ID")}`}>
-                Raw (Gist)
-              </a>
-            </nav>
-          </header>
+          <Header />
           <main>
             {children}
           </main>
-          <aside>
-            {tags.map((tag) => (<a href={`/tags/${tag}`}>{tag}</a>))}
+          <aside className="tags">
+            {tags.map((tag) => (<a href={`/tags/${tag}`} className="tag">{tag}</a>))}
           </aside>
         </div>
         <script src="/main.js" />

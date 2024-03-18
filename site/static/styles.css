@@ -104,6 +104,24 @@ body {
       margin: 16px 0;
     }
   }
+
+  .tags {
+    display: flex;
+    gap: 8px;
+
+    .tag {
+      text-decoration: none;
+      color: #555555;
+      background: #eeeeee;
+      padding: 2px 6px;
+      font-size: 14px;
+      border-radius: 4px;
+
+      &:hover {
+        color: #cccccc;
+      }
+    }
+  }
 }
 
 .meta {
