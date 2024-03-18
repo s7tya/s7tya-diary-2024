@@ -13,7 +13,7 @@ const getDatesBetween = (startDate: Temporal.PlainDate, endDate: Temporal.PlainD
 }
 
 export const Activity = ({ dates }: { dates: (string | null)[] }) => {
-    const today = Temporal.Now.plainDateISO();
+    const today = Temporal.Now.plainDateISO("Asia/Tokyo").subtract({ days: 1 });
     const daysAgo = today.subtract({ years: 1 });
 
     let streak = 0;
