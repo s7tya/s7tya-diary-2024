@@ -27,7 +27,7 @@ async function generateSHA256Hash(text) {
 
   const latestHash = await generateSHA256Hash(minifiedMarkdwon);
   const currentHash =
-    (await fetch(`/hash.json`).then((res) => res.json())).hash;
+    (await fetch(`/meta.json`).then((res) => res.json())).hash;
 
   if (latestHash != currentHash) {
     updateChecker.innerHTML =

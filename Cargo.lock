@@ -612,6 +612,8 @@ dependencies = [
  "dotenvy",
  "regex",
  "reqwest",
+ "serde",
+ "serde_json",
  "sha2",
 ]
 
