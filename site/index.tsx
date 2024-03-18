@@ -1,7 +1,12 @@
 import site from "./_config.ts";
 
-const getDatesBetween = (startDate: Temporal.ZonedDateTime, endDate: Temporal.ZonedDateTime) => {
+
+const getDatesBetween = (startDate: Temporal.ZonedDateTime, endDate: Temporal.ZonedDateTime): (Date | null)[] => {
   const dateList = [];
+
+  for (let i = 0; i < startDate.dayOfWeek; i++) {
+    dateList.push(null)
+  }
 
   for (let date = startDate; Temporal.ZonedDateTime.compare(date, endDate); date = date.add({ days: 1 })) {
     const dateObject = new Date(date.toInstant().toString());
@@ -23,7 +28,12 @@ export default function () {
   const todayAtUTC = Temporal.Now.zonedDateTimeISO('Utc').with({ hour: 0, minute: 0, second: 0, millisecond: 0 });
   const DaysAgoAtUTC = todayAtUTC.subtract({ years: 1 });
 
-  const lastMonthHistory = getDatesBetween(DaysAgoAtUTC, todayAtUTC).map((date) => {
+  const History = getDatesBetween(DaysAgoAtUTC, todayAtUTC).map((date) => {
+
+    if (date === null) {
+      return <div className="day empty"></div>
+    }
+
     return (
       <a
         id={`activity-${date.toISOString()}`}
@@ -40,7 +50,7 @@ export default function () {
       <div className="meta">
         <div className="update-checker"></div>
         <div className="activity">
-          {lastMonthHistory}
+          {History}
         </div>
       </div>
       <div className="post-list">

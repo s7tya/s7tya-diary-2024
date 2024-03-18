@@ -135,6 +135,11 @@ body {
     width: 100%;
     aspect-ratio: 1 / 1;
 
+    &.empty {
+      background: white;
+      border: none;
+    }
+
     &.active {
       background: #40c463;
       border: 1px solid rgba(27, 31, 35, 0.06);
