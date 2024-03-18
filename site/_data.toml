@@ -1,4 +1,4 @@
-layout = "layout.tsx"
+layout = "base.tsx"
 
 [site]
 title = "s7tya-diary-2024"
