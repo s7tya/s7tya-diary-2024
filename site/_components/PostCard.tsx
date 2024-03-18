@@ -5,7 +5,7 @@ export const PostCard = ({ page }: { page: Page<Data> }) => {
 
     return (
         <div key={page.data.url} className="post-card" id={`post-${page.data.basename}`}>
-            <a href={`./posts/${page.data.basename}`}>
+            <a href={`/posts/${page.data.basename}`}>
                 <h2 className="post-title">
                     {page.data.basename.replaceAll("-", ".")}
                     {page.data.title ? ` ${page.data.title}` : ""}
