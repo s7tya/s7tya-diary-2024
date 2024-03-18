@@ -124,34 +124,52 @@ body {
 
 .activity {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(7, 1fr);
-  gap: 2px;
+  gap: 4px;
 
-  .day {
-    background: #ebedf0;
-    border: 1px solid rgba(27, 31, 35, 0.06);
-    border-radius: 2px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
+  .streak {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: right;
+    text-transform: uppercase;
+  }
 
-    &.empty {
-      background: white;
-      border: none;
-    }
+  .graph {
+    /* border: 1px solid #eeeeee;
+    border-radius: 4px;
+    padding: 8px; */
 
-    &.active {
-      background: #40c463;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 2px;
+
+    .day {
+      background: #ebedf0;
       border: 1px solid rgba(27, 31, 35, 0.06);
+      border-radius: 2px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+
+      &.empty {
+        background: white;
+        border: none;
+      }
+
+      &.active {
+        background: #40c463;
+        border: 1px solid rgba(27, 31, 35, 0.06);
+      }
+    }
+
+    @media screen and (max-width: 780px) {
+      grid-auto-columns: 12px;
+      max-width: 100%;
+      width: 100%;
+      width: calc(100dvw - 40px);
+      overflow-x: scroll;
     }
   }
 
 
-  @media screen and (max-width: 780px) {
-    grid-auto-columns: 12px;
-    max-width: 100%;
-    width: 100%;
-    width: calc(100dvw - 40px);
-    overflow-x: scroll;
-  }
+
 }

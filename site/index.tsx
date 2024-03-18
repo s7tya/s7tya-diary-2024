@@ -28,6 +28,7 @@ export default function () {
   const todayAtUTC = Temporal.Now.zonedDateTimeISO('Utc').with({ hour: 0, minute: 0, second: 0, millisecond: 0 });
   const DaysAgoAtUTC = todayAtUTC.subtract({ years: 1 });
 
+  let streak = 0;
   const History = getDatesBetween(DaysAgoAtUTC, todayAtUTC).map((date) => {
 
     if (date === null) {
@@ -35,6 +36,7 @@ export default function () {
     }
 
     if (sortedPageDates.includes(date.toISOString())) {
+      streak += 1;
       return (
         <a
           id={`activity-${date.toISOString()}`}
@@ -44,6 +46,7 @@ export default function () {
       )
     }
 
+    streak = 0;
     return (
       <div
         id={`activity-${date.toISOString()}`}
@@ -58,7 +61,10 @@ export default function () {
       <div className="meta">
         <div className="update-checker"></div>
         <div className="activity">
-          {History}
+          <div className="graph">
+            {History}
+          </div>
+          {streak > 1 ? (<p className="streak">{streak} day streak</p>) : ""}
         </div>
       </div>
       <div className="post-list">
