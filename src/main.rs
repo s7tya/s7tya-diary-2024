@@ -17,6 +17,7 @@ fn main() -> anyhow::Result<()> {
     fs::create_dir_all(dir)?;
 
     let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})(?: (.*))?").unwrap();
+    let tags_re = regex::Regex::new(r#"tags = \[(("[a-z]+"(,\s)?)*)\]"#).unwrap();
     for post in posts {
         if !diary_re.is_match(post) {
             continue;
@@ -29,6 +30,20 @@ fn main() -> anyhow::Result<()> {
             caps.get(2).unwrap().as_str(),
             caps.get(3).unwrap().as_str()
         );
+
+        let tags = match tags_re.captures(post) {
+            Some(v) => format!(
+                "tags:\n{}\n",
+                v.get(1)
+                    .unwrap()
+                    .as_str()
+                    .split(',')
+                    .map(|item| format!("  - {}", item.trim()))
+                    .collect::<Vec<_>>()
+                    .join("\n")
+            ),
+            None => "".to_string(),
+        };
 
         let title = match caps.get(4) {
             Some(title) => title.as_str().to_string(),
@@ -50,8 +65,8 @@ fn main() -> anyhow::Result<()> {
         let mut file = fs::File::create(format!("{dir}/posts/{date_str}.mdx",))?;
         file.write_all(
             format!(
-                "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n---\n\n{}\n",
-                post.trim().replace("## ", "# ")
+                "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n{tags}---\n\n{}\n",
+                tags_re.replace(&post.trim().replace("## ", "# "), "")
             )
             .as_bytes(),
         )?;
