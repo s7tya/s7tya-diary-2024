@@ -6,6 +6,7 @@ import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
 import codeHighlight from "lume/plugins/code_highlight.ts";
 import feed from "lume/plugins/feed.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 
 await load({ envPath: "../.env", export: true });
 
@@ -33,5 +34,6 @@ site.use(feed({
     },
   },
 }));
+site.use(esbuild());
 
 export default site;

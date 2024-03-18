@@ -1,4 +1,4 @@
-async function generateSHA256Hash(text) {
+async function generateSHA256Hash(text: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
 
