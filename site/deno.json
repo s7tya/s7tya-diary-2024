@@ -3,7 +3,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "npm:react",
     "types": [
-      "https://unpkg.com/@types/react@18.2.47/index.d.ts",
+      "npm:@types/react/index.d.ts",
       "lume/types.ts"
     ]
   },
