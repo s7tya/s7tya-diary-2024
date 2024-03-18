@@ -73,7 +73,7 @@ body {
 
   main {
     display: grid;
-    gap: 8px;
+    gap: 16px;
 
     h1 {
       font-size: 20px;
@@ -104,4 +104,12 @@ body {
       margin: 16px 0;
     }
   }
+}
+
+.warning {
+  padding: 8px;
+  font-size: 14px;
+  background: #fff6e4;
+  color: #333333;
+  border-radius: 4px;
 }

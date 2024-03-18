@@ -54,6 +54,7 @@ export default ({ title, children }: Lume.Data, helpers: Lume.Helpers) => {
             {children}
           </main>
         </div>
+        <script src="/main.js" />
       </body>
     </html>
   );

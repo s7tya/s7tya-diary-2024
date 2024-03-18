@@ -1,2 +1,3 @@
 _site/
 posts/*.mdx
+static/hash.json

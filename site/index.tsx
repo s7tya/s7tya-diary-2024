@@ -3,6 +3,7 @@ import site from "./_config.ts";
 export default function () {
   return (
     <>
+      <div className="update-checker"></div>
       <div className="post-list">
         {site.pages.filter((page) => page.data.url.startsWith("/posts/")).sort(
           (a, b) => {

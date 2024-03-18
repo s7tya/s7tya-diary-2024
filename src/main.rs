@@ -1,5 +1,7 @@
 use std::{env, fs, io::Write};
 
+use sha2::{Digest, Sha256};
+
 fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
 
@@ -8,10 +10,9 @@ fn main() -> anyhow::Result<()> {
         env::var("GIST_ID").unwrap()
     ))?
     .text()?;
-    // let raw_markdown = fs::read_to_string("s7tya-diary-2024.md")?;
     let posts = raw_markdown.split("---").collect::<Vec<_>>();
 
-    let dir = "site/posts/";
+    let dir = "site";
     fs::create_dir_all(dir)?;
 
     let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})(?: (.*))?").unwrap();
@@ -29,15 +30,21 @@ fn main() -> anyhow::Result<()> {
         );
 
         let title = match caps.get(4) {
-            Some(title) => format!("{}", title.as_str()),
+            Some(title) => title.as_str().to_string(),
             None => "".to_string(),
         };
 
-        let mut file = fs::File::create(format!("{dir}{date_str}.mdx",))?;
+        let space_re = regex::Regex::new(r"[\s\t\n]").unwrap();
+        let minified_markdown = space_re.replace_all(&raw_markdown, "");
+        let mut file = fs::File::create(format!("{dir}/static/hash.json"))?;
+        let hash = Sha256::digest(minified_markdown.as_bytes());
+        file.write_all(format!(r#"{{ "hash": "{:x}" }}"#, hash).as_bytes())?;
+
+        let mut file = fs::File::create(format!("{dir}/posts/{date_str}.mdx",))?;
         file.write_all(
             format!(
                 "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n---\n\n{}\n",
-                post.trim().replace("##", "#")
+                post.trim().replace("## ", "# ")
             )
             .as_bytes(),
         )?;
