@@ -106,6 +106,11 @@ body {
   }
 }
 
+.meta {
+  max-width: 100%;
+  width: 100%;
+}
+
 .update-checker {
   .warning {
     margin-bottom: 16px;
@@ -134,5 +139,14 @@ body {
       background: #40c463;
       border: 1px solid rgba(27, 31, 35, 0.06);
     }
+  }
+
+
+  @media screen and (max-width: 780px) {
+    grid-auto-columns: 12px;
+    max-width: 100%;
+    width: 100%;
+    width: calc(100dvw - 40px);
+    overflow-x: scroll;
   }
 }
