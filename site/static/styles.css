@@ -187,7 +187,27 @@ body {
       overflow-x: scroll;
     }
   }
+}
 
+.pagination {
+  display: flex;
+  justify-content: space-between;
 
+  .previous {
+    align-self: flex-start;
+  }
 
+  .next {
+    align-self: flex-end;
+  }
+
+  .previous>a,
+  .next>a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
