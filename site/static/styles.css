@@ -73,7 +73,7 @@ body {
 
   main {
     display: grid;
-    gap: 16px;
+    gap: 20px;
 
     h1 {
       font-size: 20px;
@@ -107,9 +107,8 @@ body {
 }
 
 .update-checker {
-  margin: 16px 0;
-
   .warning {
+    margin-bottom: 16px;
     padding: 8px;
     font-size: 14px;
     background: #fff6e4;

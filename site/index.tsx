@@ -25,8 +25,12 @@ export default function () {
 
   const lastMonthHistory = getDatesBetween(DaysAgoAtUTC, todayAtUTC).map((date) => {
     return (
-      <div className={`day${sortedPageDates.includes(date.toISOString()) ? " active" : ""}`}>
-      </div>
+      <a
+        id={`activity-${date.toISOString()}`}
+        className={`day${sortedPageDates.includes(date.toISOString()) ? " active" : ""}`}
+        href={`/#post-${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getDate()}`}
+      >
+      </a>
     )
   });
 
@@ -45,7 +49,7 @@ export default function () {
             const paragraphs = (page.data.content as string).split("\n\n");
 
             return (
-              <div key={page.data.url} className="post-card">
+              <div key={page.data.url} className="post-card" id={`post-${page.data.basename}`}>
                 <a href={`./posts/${page.data.basename}`}>
                   <h2 className="post-title">
                     {page.data.basename.replaceAll("-", ".")}
