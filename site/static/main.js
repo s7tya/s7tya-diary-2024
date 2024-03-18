@@ -29,8 +29,6 @@ async function generateSHA256Hash(text) {
   const currentHash =
     (await fetch(`/hash.json`).then((res) => res.json())).hash;
 
-  console.log("lat: ", latestHash, "cur: ", currentHash);
-
   if (latestHash != currentHash) {
     updateChecker.innerHTML =
       `<p class="warning">記事の内容に更新があります。最新の情報はGistを確認してください。</p>`;

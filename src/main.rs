@@ -38,7 +38,7 @@ fn main() -> anyhow::Result<()> {
         let minified_markdown = space_re.replace_all(&raw_markdown, "");
         let mut file = fs::File::create(format!("{dir}/static/hash.json"))?;
         let hash = Sha256::digest(minified_markdown.as_bytes());
-        file.write_all(format!(r#"{{ "hash": "{:x}" }}"#, hash).as_bytes())?;
+        file.write_all(format!(r#"{{"hash":"{:x}"}}"#, hash).as_bytes())?;
 
         let mut file = fs::File::create(format!("{dir}/posts/{date_str}.mdx",))?;
         file.write_all(
