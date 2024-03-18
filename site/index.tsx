@@ -1,16 +1,14 @@
 import site from "./_config.ts";
 
-
-const getDatesBetween = (startDate: Temporal.ZonedDateTime, endDate: Temporal.ZonedDateTime): (Date | null)[] => {
+const getDatesBetween = (startDate: Temporal.PlainDate, endDate: Temporal.PlainDate): (string | null)[] => {
   const dateList = [];
 
   for (let i = 0; i < startDate.dayOfWeek; i++) {
     dateList.push(null)
   }
 
-  for (let date = startDate; Temporal.ZonedDateTime.compare(date, endDate); date = date.add({ days: 1 })) {
-    const dateObject = new Date(date.toInstant().toString());
-    dateList.push(dateObject);
+  for (let date = startDate; Temporal.PlainDate.compare(date, endDate) <= 0; date = date.add({ days: 1 })) {
+    dateList.push(date.toString())
   }
 
   return dateList;
@@ -23,25 +21,25 @@ export default function () {
     },
   )
 
-  const sortedPageDates = sortedPages.map((page) => page.data.date.toISOString());
+  const sortedPageDates = sortedPages.map((page) => page.data.date.toISOString().slice(0, 10));
 
-  const todayAtUTC = Temporal.Now.zonedDateTimeISO('Utc').with({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-  const DaysAgoAtUTC = todayAtUTC.subtract({ years: 1 });
+  const today = Temporal.Now.plainDateISO();
+  const daysAgo = today.subtract({ years: 1 });
 
   let streak = 0;
-  const History = getDatesBetween(DaysAgoAtUTC, todayAtUTC).map((date) => {
+  const History = getDatesBetween(daysAgo, today).map((date) => {
 
     if (date === null) {
       return <div className="day empty"></div>
     }
 
-    if (sortedPageDates.includes(date.toISOString())) {
+    if (sortedPageDates.includes(date)) {
       streak += 1;
       return (
         <a
-          id={`activity-${date.toISOString()}`}
+          id={`activity-${date}`}
           className="day active"
-          href={`/#post-${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getDate()}`}
+          href={`/#post-${date}`}
         />
       )
     }
@@ -49,7 +47,7 @@ export default function () {
     streak = 0;
     return (
       <div
-        id={`activity-${date.toISOString()}`}
+        id={`activity-${date}`}
         className="day"
       />
     )
