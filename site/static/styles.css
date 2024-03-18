@@ -127,6 +127,14 @@ body {
 .meta {
   max-width: 100%;
   width: 100%;
+
+  .title {
+    margin-bottom: 16px;
+
+    .prefix {
+      font-size: 14px;
+    }
+  }
 }
 
 .update-checker {
@@ -190,18 +198,11 @@ body {
 }
 
 .pagination {
-  display: flex;
-  justify-content: space-between;
-
-  .previous {
-    align-self: flex-start;
-  }
-
-  .next {
-    align-self: flex-end;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   .previous>a,
+  .a-year-ago>a,
   .next>a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.6);
@@ -209,5 +210,9 @@ body {
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .next {
+    text-align: right;
   }
 }

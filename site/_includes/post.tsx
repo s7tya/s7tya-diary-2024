@@ -1,10 +1,15 @@
+import { Data } from "lume/core/file.ts";
 import { Head } from "../_components/Head.tsx";
 import { Header } from "../_components/Header.tsx";
+import site from "../_config.ts"
 
-export default ({ title, children, tags, search, url }: Lume.Data, helpers: Lume.Helpers) => {
+export default ({ title, children, tags, search, url, date }: Lume.Data, helpers: Lume.Helpers) => {
 
     const previousPage = search.previousPage(url, "type=post");
     const nextPage = search.nextPage(url, "type=post");
+
+    const aYearAgoDate = Temporal.PlainDate.from(date.toISOString().slice(0, 10)).subtract({ years: 1 }).toString()
+    const aYearAgoPage: (Data | undefined) = site.pages.find((page) => page.data.type === "post" && page.data.date.toISOString().slice(0, 10) == aYearAgoDate)?.data;
 
     return (
         <html>
@@ -24,6 +29,14 @@ export default ({ title, children, tags, search, url }: Lume.Data, helpers: Lume
                                 <a href={previousPage.url}>
                                     ← {previousPage.date.toISOString().slice(0, 10).replaceAll("-", ".")}
                                     {previousPage.title ? ` ${previousPage.title}` : ""}
+                                </a>
+                            )}
+                        </div>
+                        <div className="a-year-ago">
+                            {aYearAgoPage && (
+                                <a href={aYearAgoPage.url}>
+                                    {aYearAgoPage.date.toISOString().slice(0, 10).replaceAll("-", ".")}
+                                    {aYearAgoPage.title ? ` ${aYearAgoPage.title}` : ""}
                                 </a>
                             )}
                         </div>

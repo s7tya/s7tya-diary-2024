@@ -1,41 +1,36 @@
 import { Activity } from "../_components/Activity.tsx";
+import { PostList } from "../_components/PostList.tsx";
+import site from "../_config.ts"
 
 export const layout = "base.tsx";
 
 export default function* ({ search }: Lume.Data) {
     const tags: string[] = search.values("tags");
 
-    for (const tag of tags) {
-        const pages = search.pages(tag as string, "date=desc");
-        const dates = pages.map((page) => page.date.toISOString().slice(0, 10));
+    const sortedPages = site.pages.filter((page) => page.data.url.startsWith("/posts/")).sort(
+        (a, b) => {
+            return b.data.date.getTime() - a.data.date.getTime();
+        },
+    )
 
-        const Links = pages.map((page) => {
-            return (
-                <div key={page.url} className="post-card" id={`post-${page.basename}`}>
-                    <a href={`/posts/${page.basename}`}>
-                        <h2 className="post-title">
-                            {page.basename.replaceAll("-", ".")}
-                            {page.title ? ` ${page.title}` : ""}
-                        </h2>
-                        <p>
-                            {/* {paragraphs[1].slice(undefined, 80).replace("\\n", "")}
-                            {paragraphs[1].length > 80 || paragraphs.length > 2
-                                ? "..."
-                                : ""} */}
-                        </p>
-                    </a>
-                </div>)
-        });
+    for (const tag of tags) {
+        const pages = sortedPages.filter((page) => page.data.tags.includes(tag));
+        const dates = pages.map((page) => page.data.date.toISOString().slice(0, 10));
 
         yield {
-            title: `${tag}のページ一覧`,
+            title: `${tag}`,
             url: `/tags/${tag}/`,
             content: (
-                <div>
-                    <h1>/tags/{tag}</h1>
-                    <Activity dates={dates} />
-                    {Links}
-                </div>
+                <main>
+                    <div className="meta">
+                        <hgroup className="title">
+                            <p className="prefix">/tags</p>
+                            <h1>{tag}</h1>
+                        </hgroup>
+                        <Activity dates={dates} />
+                    </div>
+                    <PostList pages={pages} />
+                </main>
             )
         };
     }
