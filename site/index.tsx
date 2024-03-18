@@ -34,13 +34,21 @@ export default function () {
       return <div className="day empty"></div>
     }
 
+    if (sortedPageDates.includes(date.toISOString())) {
+      return (
+        <a
+          id={`activity-${date.toISOString()}`}
+          className="day active"
+          href={`/#post-${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getDate()}`}
+        />
+      )
+    }
+
     return (
-      <a
+      <div
         id={`activity-${date.toISOString()}`}
-        className={`day${sortedPageDates.includes(date.toISOString()) ? " active" : ""}`}
-        href={`/#post-${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getDate()}`}
-      >
-      </a>
+        className="day"
+      />
     )
   });
 
