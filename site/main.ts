@@ -25,7 +25,7 @@ async function generateSHA256Hash(text: string): Promise<string> {
   }
 
   const rawMarkdown = await fetch(
-    `https://raw.githack.com/gist/${process.env.GIST_ID}`,
+    `https://raw.githack.com/gist/${process.env.GIST_ID}/raw`,
   ).then((
     res,
   ) => res.text());
