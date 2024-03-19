@@ -1,5 +1,7 @@
 use std::{env, fs, io::Write};
 
+use chrono::Utc;
+use chrono_tz::Asia::Tokyo;
 use serde_json::json;
 use sha2::{Digest, Sha256};
 
@@ -30,6 +32,12 @@ fn main() -> anyhow::Result<()> {
             caps.get(2).unwrap().as_str(),
             caps.get(3).unwrap().as_str()
         );
+
+        let post_date = chrono::NaiveDate::parse_from_str(&date_str, "%Y-%m-%d")?;
+        let today = Utc::now().with_timezone(&Tokyo).date_naive();
+        if post_date >= today {
+            continue;
+        }
 
         let tags = match tags_re.captures(post) {
             Some(v) => format!(
@@ -66,7 +74,7 @@ fn main() -> anyhow::Result<()> {
         file.write_all(
             format!(
                 "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n{tags}---\n\n{}\n",
-                tags_re.replace(&post.trim().replace("## ", "# "), "")
+                tags_re.replace(&post.replace("## ", "# "), "").trim()
             )
             .as_bytes(),
         )?;
