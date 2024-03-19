@@ -3,7 +3,7 @@ import { Head } from "../_components/Head.tsx";
 import { Header } from "../_components/Header.tsx";
 import site from "../_config.ts"
 
-export default ({ title, children, tags, search, url, date }: Lume.Data, helpers: Lume.Helpers) => {
+export default ({ title, children, tags, search, url, date, site: siteData }: Lume.Data, helpers: Lume.Helpers) => {
 
     const previousPage = search.previousPage(url, "type=post");
     const nextPage = search.nextPage(url, "type=post");
@@ -16,12 +16,12 @@ export default ({ title, children, tags, search, url, date }: Lume.Data, helpers
             <Head title={title!} />
             <body>
                 <div className="root">
-                    <Header />
+                    <Header title={siteData.title} />
                     <main>
                         {children}
                     </main>
                     <aside className="tags">
-                        {tags.map((tag) => (<a href={`/tags/${tag}`} className="tag">{tag}</a>))}
+                        {tags.map((tag) => (<a key={`tag-${tag}`} href={`/tags/${tag}`} className="tag">{tag}</a>))}
                     </aside>
                     <aside className="pagination">
                         <div className="previous">

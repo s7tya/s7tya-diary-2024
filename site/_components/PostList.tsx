@@ -7,7 +7,7 @@ export const PostList = ({ pages }: { pages: Page<Data>[] }) => {
             {pages.map(
                 (page) => {
                     return (
-                        <PostCard page={page} />
+                        <PostCard key={page.data.url} page={page} />
                     );
                 },
             )}

@@ -20,13 +20,14 @@ export const Activity = ({ dates }: { dates: (string | null)[] }) => {
     const History = getDatesBetween(daysAgo, today).map((date) => {
 
         if (date === null) {
-            return <div className="day empty"></div>
+            return <div key={`activity-${date}`} className="day empty"></div>
         }
 
         if (dates.includes(date)) {
             streak += 1;
             return (
                 <a
+                    key={`activity-${date}`}
                     id={`activity-${date}`}
                     className="day active"
                     href={`/#post-${date}`}
@@ -37,6 +38,7 @@ export const Activity = ({ dates }: { dates: (string | null)[] }) => {
         streak = 0;
         return (
             <div
+                key={`activity-${date}`}
                 id={`activity-${date}`}
                 className="day"
             />
