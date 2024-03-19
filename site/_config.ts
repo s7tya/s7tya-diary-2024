@@ -7,6 +7,7 @@ import mdx from "lume/plugins/mdx.ts";
 import codeHighlight from "lume/plugins/code_highlight.ts";
 import feed from "lume/plugins/feed.ts";
 import esbuild from "lume/plugins/esbuild.ts";
+import lightningCss from "lume/plugins/lightningcss.ts";
 
 await load({ envPath: "../.env", export: true });
 
@@ -43,5 +44,6 @@ site.use(esbuild({
     },
   },
 }));
+site.use(lightningCss());
 
 export default site;
