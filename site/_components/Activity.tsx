@@ -4,7 +4,7 @@ const getDatesBetween = (
 ): (string | null)[] => {
   const dateList = [];
 
-  for (let i = 0; i < startDate.dayOfWeek; i++) {
+  for (let i = 0; i < (startDate.dayOfWeek % 7); i++) {
     dateList.push(null);
   }
 
