@@ -3,13 +3,17 @@ import { PostList } from "./_components/PostList.tsx";
 import site from "./_config.ts";
 
 export default function () {
-  const sortedPages = site.pages.filter((page) => page.data.url.startsWith("/posts/")).sort(
+  const sortedPages = site.pages.filter((page) =>
+    page.data.url.startsWith("/posts/")
+  ).sort(
     (a, b) => {
       return b.data.date.getTime() - a.data.date.getTime();
     },
-  )
+  );
 
-  const sortedPageDates = sortedPages.map((page) => page.data.date.toISOString().slice(0, 10));
+  const sortedPageDates = sortedPages.map((page) =>
+    page.data.date.toISOString().slice(0, 10)
+  );
 
   return (
     <>

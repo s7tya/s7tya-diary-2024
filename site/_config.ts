@@ -30,15 +30,17 @@ site.use(feed({
   },
   items: {
     title: (data) => {
-      return `${data.basename.replaceAll("-", ".")}${data.title ? ` ${data.title}` : ""}`
+      return `${data.basename.replaceAll("-", ".")}${
+        data.title ? ` ${data.title}` : ""
+      }`;
     },
   },
 }));
 site.use(esbuild({
   options: {
     define: {
-      "process.env.GIST_ID": JSON.stringify(Deno.env.get("GIST_ID"))
-    }
+      "process.env.GIST_ID": JSON.stringify(Deno.env.get("GIST_ID")),
+    },
   },
 }));
 

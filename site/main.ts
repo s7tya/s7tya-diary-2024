@@ -1,8 +1,8 @@
 declare const process: {
   env: {
-    GIST_ID: string
-  }
-}
+    GIST_ID: string;
+  };
+};
 
 async function generateSHA256Hash(text: string): Promise<string> {
   const encoder = new TextEncoder();
