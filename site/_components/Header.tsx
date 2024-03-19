@@ -1,9 +1,9 @@
 
-export const Header = () => {
+export const Header = ({ title }: { title: string }) => {
     return (
         <header className="header">
             <h1>
-                <a href="/">/s7tya-diary-2024</a>
+                <a href="/">/{title}</a>
             </h1>
             <nav>
                 <a href="/rss.xml">📡 Feed</a>

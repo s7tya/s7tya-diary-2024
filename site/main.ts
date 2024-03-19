@@ -1,3 +1,9 @@
+declare const process: {
+  env: {
+    GIST_ID: string
+  }
+}
+
 async function generateSHA256Hash(text: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
@@ -19,7 +25,7 @@ async function generateSHA256Hash(text: string): Promise<string> {
   }
 
   const rawMarkdown = await fetch(
-    `https://raw.githack.com/gist/s7tya/efff8d8635292b8a3305c850e5be2330/raw`,
+    `https://raw.githack.com/gist/${process.env.GIST_ID}`,
   ).then((
     res,
   ) => res.text());

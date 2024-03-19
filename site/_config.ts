@@ -10,7 +10,7 @@ import esbuild from "lume/plugins/esbuild.ts";
 
 await load({ envPath: "../.env", export: true });
 
-const site = lume({ location: new URL("https://diary.s7tya.com") });
+const site = lume({ location: new URL(Deno.env.get("BASE_URL")!) });
 
 site.copy("static", "/");
 
@@ -34,6 +34,12 @@ site.use(feed({
     },
   },
 }));
-site.use(esbuild());
+site.use(esbuild({
+  options: {
+    define: {
+      "process.env.GIST_ID": JSON.stringify(Deno.env.get("GIST_ID"))
+    }
+  },
+}));
 
 export default site;

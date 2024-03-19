@@ -10,7 +10,7 @@ export default ({ title, children, search }: Lume.Data, helpers: Lume.Helpers) =
       <Head title={title!} />
       <body>
         <div className="root">
-          <Header />
+          <Header title={title} />
           <main>
             {children}
           </main>
