@@ -37,33 +37,43 @@ export default (
             <div className="previous">
               {previousPage && (
                 <a href={previousPage.url}>
-                  ← {previousPage.date.toISOString().slice(0, 10).replaceAll(
-                    "-",
-                    ".",
-                  )}
-                  {previousPage.title ? ` ${previousPage.title}` : ""}
+                  <span>
+                    ← {previousPage.date.toISOString().slice(0, 10).replaceAll(
+                      "-",
+                      ".",
+                    )}
+                  </span>
+                  <span>
+                    {previousPage.title ? ` ${previousPage.title}` : ""}
+                  </span>
                 </a>
               )}
             </div>
             <div className="a-year-ago">
               {aYearAgoPage && (
                 <a href={aYearAgoPage.url}>
-                  {aYearAgoPage.date.toISOString().slice(0, 10).replaceAll(
-                    "-",
-                    ".",
-                  )}
-                  {aYearAgoPage.title ? ` ${aYearAgoPage.title}` : ""}
+                  <span>
+                    {aYearAgoPage.date.toISOString().slice(0, 10).replaceAll(
+                      "-",
+                      ".",
+                    )}
+                  </span>
+                  <span>
+                    {aYearAgoPage.title ? ` ${aYearAgoPage.title}` : ""}
+                  </span>
                 </a>
               )}
             </div>
             <div className="next">
               {nextPage && (
                 <a href={nextPage.url}>
-                  {nextPage.date.toISOString().slice(0, 10).replaceAll(
-                    "-",
-                    ".",
-                  )}
-                  {nextPage.title ? ` ${nextPage.title}` : ""} →
+                  <span>
+                    {nextPage.date.toISOString().slice(0, 10).replaceAll(
+                      "-",
+                      ".",
+                    )}
+                  </span>
+                  <span>{nextPage.title ? ` ${nextPage.title}` : ""} →</span>
                 </a>
               )}
             </div>

@@ -201,18 +201,43 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
-  .previous>a,
-  .a-year-ago>a,
-  .next>a {
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.6);
+  .previous,
+  .a-year-ago,
+  .next {
+    &>a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 4px;
 
-    &:hover {
-      text-decoration: underline;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .previous {
+    text-align: left;
+
+    &>a {
+      justify-content: flex-start;
+    }
+  }
+
+  .a-year-ago {
+    text-align: center;
+
+    &>a {
+      justify-content: center;
     }
   }
 
   .next {
     text-align: right;
+
+    &>a {
+      justify-content: flex-end;
+    }
   }
 }
