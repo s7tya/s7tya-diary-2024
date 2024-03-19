@@ -2,7 +2,7 @@ import { Activity } from "../_components/Activity.tsx";
 import { PostList } from "../_components/PostList.tsx";
 import site from "../_config.ts";
 
-export const layout = "base.tsx";
+export const layout = "collection.tsx";
 
 export default function* ({ search }: Lume.Data) {
   const tags: string[] = search.values("tags");

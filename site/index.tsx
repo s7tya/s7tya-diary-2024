@@ -2,6 +2,8 @@ import { Activity } from "./_components/Activity.tsx";
 import { PostList } from "./_components/PostList.tsx";
 import site from "./_config.ts";
 
+export const layout = "collection.tsx";
+
 export default function () {
   const sortedPages = site.pages.filter((page) =>
     page.data.url.startsWith("/posts/")
