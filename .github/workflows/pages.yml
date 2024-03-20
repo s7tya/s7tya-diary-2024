@@ -49,10 +49,14 @@ jobs:
 
       - uses: denoland/setup-deno@v1
 
+      - name: Get deno cache dir
+        id: get-deno-cache-dir
+        run: echo "::set-output name=dir::$(deno info | grep DENO_DIR | sed -e 's/.* "//' -e 's/"$//')"
+
       - name: Cache Deno dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ deno info | grep DENO_DIR | sed -e 's/.* "//' -e 's/"$//' }}
+          path: ${{ steps.get-deno-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-deno-deps-${{ hashFiles('**/deno.lock') }}
 
       - name: Build site
