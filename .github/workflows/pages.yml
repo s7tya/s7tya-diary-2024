@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./target/release/s7tya-diary-2024
-          key: ${{ runner.os }}-binary-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-binary-${{ hashFiles('**/Cargo.lock') }}-${{ hashFiles('**/*.rs') }}
 
       - uses: dtolnay/rust-toolchain@stable
         if: steps.cache-binary.outputs.cache-hit != 'true'
