@@ -25,7 +25,6 @@ jobs:
     env:
       BASE_URL: ${{ vars.BASE_URL }}
       GIST_ID: ${{ vars.GIST_ID }}
-      DENO_DIR: ../.deno
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,12 +48,6 @@ jobs:
         run: ./target/release/s7tya-diary-2024
 
       - uses: denoland/setup-deno@v1
-
-      - name: Cache Deno dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.DENO_DIR }}
-          key: ${{ runner.os }}-deno-deps-${{ hashFiles('**/deno.lock') }}
 
       - name: Build site
         run: cd site && deno task build && cd ..
