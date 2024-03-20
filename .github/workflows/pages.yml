@@ -52,9 +52,7 @@ jobs:
       - name: Cache Deno dependencies
         uses: actions/cache@v2
         with:
-          path: |
-            ${{ env.HOME }}/.cache/deno
-            /tmp/deno
+          path: ${{ deno info | grep DENO_DIR | sed -e 's/.* "//' -e 's/"$//' }}
           key: ${{ runner.os }}-deno-deps-${{ hashFiles('**/deno.lock') }}
 
       - name: Build site
