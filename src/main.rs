@@ -58,8 +58,8 @@ fn main() -> anyhow::Result<()> {
             None => "".to_string(),
         };
 
-        let space_re = regex::Regex::new(r"[\s\t\n]").unwrap();
-        let minified_markdown = space_re.replace_all(&raw_markdown, "");
+        let whitespace_re = regex::Regex::new(r"[\s\t\n]").unwrap();
+        let minified_markdown = whitespace_re.replace_all(&raw_markdown, "");
         let mut file = fs::File::create(format!("{dir}/static/meta.json"))?;
         let hash = Sha256::digest(minified_markdown.as_bytes());
         file.write_all(
