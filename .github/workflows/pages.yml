@@ -30,9 +30,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Cache binary
+        id: cache-binary
+        uses: actions/cache@v4
+        with:
+          path: ./target/release/s7tya-diary-2024
+          key: ${{ runner.os }}-binary-${{ hashFiles('**/Cargo.lock') }
+
       - uses: dtolnay/rust-toolchain@stable
+        if: steps.cache-binary.outputs.cache-hit != 'true'
+
       - name: Build app
+        if: steps.cache-binary.outputs.cache-hit != 'true'
         run: cargo build --release
+
       - name: Run binary
         run: ./target/release/s7tya-diary-2024
 
