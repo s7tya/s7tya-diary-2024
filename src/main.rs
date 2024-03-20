@@ -15,7 +15,7 @@ fn main() -> anyhow::Result<()> {
     .text()?;
     let posts = raw_markdown.split("---").collect::<Vec<_>>();
 
-    let dir = "site";
+    let dir = "site/static";
     fs::create_dir_all(dir)?;
 
     let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})(?: (.*))?").unwrap();
