@@ -41,14 +41,14 @@ fn main() -> anyhow::Result<()> {
 
         let tags = match tags_re.captures(post) {
             Some(v) => format!(
-                "tags:\n{}\n",
+                "tags = [{}]\n",
                 v.get(1)
                     .unwrap()
                     .as_str()
                     .split(',')
-                    .map(|item| format!("  - {}", item.trim()))
+                    .map(|item| item.trim())
                     .collect::<Vec<_>>()
-                    .join("\n")
+                    .join(",")
             ),
             None => "".to_string(),
         };
@@ -73,7 +73,7 @@ fn main() -> anyhow::Result<()> {
         let mut file = fs::File::create(format!("{dir}/posts/{date_str}.mdx",))?;
         file.write_all(
             format!(
-                "---\ntitle: \"{title}\"\ndate: \"{date_str}\"\n{tags}---\n\n{}\n",
+                "---toml\ntitle = \"{title}\"\ndate = \"{date_str}\"\n{tags}---\n\n{}\n",
                 tags_re.replace(&post.replace("## ", "# "), "").trim()
             )
             .as_bytes(),
