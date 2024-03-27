@@ -19,7 +19,7 @@ fn main() -> anyhow::Result<()> {
     fs::create_dir_all(format!("{dir}/static"))?;
 
     let diary_re = regex::Regex::new(r"## ([0-9]{4}).([0-9]{2}).([0-9]{2})(?: (.*))?").unwrap();
-    let tags_re = regex::Regex::new(r#"tags = \[(("[a-z]+"(,\s)?)*)\]"#).unwrap();
+    let tags_re = regex::Regex::new(r#"tags = \[(("[a-z_]+"(,\s)?)*)\]"#).unwrap();
     for post in posts {
         if !diary_re.is_match(post) {
             continue;
