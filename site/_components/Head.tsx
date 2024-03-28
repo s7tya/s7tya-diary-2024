@@ -17,6 +17,11 @@ export const Head = ({ title }: { title: string }) => {
 
       <link
         rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/yakuhanjp@4.0.1/dist/css/yakuhanjp.css"
+      />
+
+      <link
+        rel="stylesheet"
         href="https://unpkg.com/ress/dist/ress.min.css"
       />
       <link
