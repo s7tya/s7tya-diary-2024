@@ -14,7 +14,7 @@ export default (
       <aside className="tags">
         {tags.map((tag) => (
           <a key={`tag-${tag}`} href={`/tags/${tag}`} className="tag">
-            {tag}
+            {tag} ({search.pages(`type=post ${tag}`).length})
           </a>
         ))}
       </aside>
